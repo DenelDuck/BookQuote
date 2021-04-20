@@ -7,15 +7,15 @@ import javax.servlet.http.*;
 /** Example of a Servlet that gets an ISBN number and returns the book price
  */
 
-public class BookQuote extends HttpServlet {
+public class Temperature extends HttpServlet {
  	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Quoter quoter;
+	private TemperatureCalc temperatureCalc;
 	
     public void init() throws ServletException {
-    	quoter = new Quoter();
+    	temperatureCalc = new TemperatureCalc();
     }	
 	
   public void doGet(HttpServletRequest request,
@@ -26,7 +26,7 @@ public class BookQuote extends HttpServlet {
     PrintWriter out = response.getWriter();
     String docType =
       "<!DOCTYPE HTML>\n";
-    String title = "Book Quote"; 
+    String title = "Temperature Converter"; 
     out.println(docType +
                 "<HTML>\n" +
                 "<HEAD><TITLE>" + title + "</TITLE>" +
@@ -34,10 +34,10 @@ public class BookQuote extends HttpServlet {
                 		"</HEAD>\n" +
                 "<BODY BGCOLOR=\"#FDF5E6\">\n" +
                 "<H1>" + title + "</H1>\n" +              
-                "  <P>ISBN number: " +
-                   request.getParameter("isbn") + "\n" +
+                "  <P>Temperature in celsius " +
+                   request.getParameter("celsius") + "\n" +
                 "  <P>Price: " +
-                   Double.toString(quoter.getBookPrice(request.getParameter("isbn"))) +
+                   Double.toString(temperatureCalc.toFahrenheit(request.getParameter("celsius"))) +
                 "</BODY></HTML>");
   }
   
